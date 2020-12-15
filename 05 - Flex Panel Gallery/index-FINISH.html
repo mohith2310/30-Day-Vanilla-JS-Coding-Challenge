@@ -76,7 +76,7 @@
             margin: 0;
             width: 100%;
             transition: transform 0.5s;
-            border: 2px solid black;
+            /* border: 2px solid black; */
             flex: 1 0 auto;
             display: flex;
             justify-content: center;
@@ -149,17 +149,25 @@
         const panels = document.querySelectorAll(".panel");
         panels.forEach(panel => panel.addEventListener("click", function() {
             temp = this;
-            this.classList.toggle('open');
+            panels.forEach(panel1 => {
+                if (panel1 != temp) {
+                    panel1.classList.remove('open');
+                }
 
+            })
+            temp.classList.toggle('open');
         }))
 
         panels.forEach(panel => panel.addEventListener("transitionend", function(e) {
             if (e.propertyName.includes('flex')) {
                 temp1 = this;
-                this.classList.toggle('open-active');
+                panels.forEach(panel1 => {
+                    if (temp1 != panel1) {
+                        panel1.classList.remove('open-active');
+                    }
+                })
+                temp1.classList.toggle('open-active');
             }
-
-
         }))
     </script>
 
